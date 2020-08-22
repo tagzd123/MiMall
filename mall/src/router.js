@@ -8,7 +8,9 @@ import Cart from './pages/cart'
 import Order from './pages/order'
 import OrderList from './pages/orderList'
 import OrderPay from './pages/orderPay'
+import AliPay from './pages/aliPay'
 import OrderConfirm from './pages/orderConfirm'
+
 
 Vue.use(Router);
 
@@ -17,6 +19,7 @@ export default new Router({
             path: '/',
             name: 'home',
             component: Home,
+            redirect:'/index',
             children: [{
                     path: '/index',
                     name: 'index',
@@ -59,6 +62,11 @@ export default new Router({
                     path: 'pay',
                     name: 'order-pay',
                     component: OrderPay,
+                },
+                {
+                    path: 'alipay',
+                    name: 'alipay',
+                    component:AliPay,
                 }
             ]
         }
