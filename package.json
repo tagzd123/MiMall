@@ -2,6 +2,7 @@
   "devDependencies": {
     "axios": "^0.20.0",
     "element-ui": "^2.13.2",
+    "mockjs": "^1.1.0",
     "node-sass": "^4.14.1",
     "sass-loader": "^9.0.3",
     "vue-awesome-swiper": "^4.1.1",
