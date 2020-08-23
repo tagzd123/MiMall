@@ -12,7 +12,12 @@ export default {
     
   },
   mounted(){
+    //本地加载请求静态json文件的形式
+    this.axios.get('/mock/user/login.json').then((res)=>{
+      this.res=res;
+    //通过easy-mock
     
+    });
   }
 }
 </script>
