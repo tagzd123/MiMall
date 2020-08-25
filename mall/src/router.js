@@ -12,6 +12,7 @@ import AliPay from './pages/aliPay'
 import OrderConfirm from './pages/orderConfirm'
 
 
+
 Vue.use(Router);
 
 export default new Router({
@@ -69,7 +70,7 @@ export default new Router({
                     component:AliPay,
                 }
             ]
-        }
-
+        },
+        
     ]
 });
