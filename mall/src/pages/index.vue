@@ -10,10 +10,7 @@
                 <ul v-for="(item, index) in menuList" :key="index">
                   <li v-for="(sub, index) in item" :key="index">
                     <a v-bind:href="sub ? '/#/product/' + sub.id : ''">
-                      <img
-                        v-bind:src="sub.img || '/imgs/item-box-1.png'"
-                        alt=""
-                      />
+                      <img v-bind:src="sub.img || '/imgs/item-box-1.png'" alt />
                       {{ sub ? sub.name : "小米9" }}
                     </a>
                   </li>
@@ -45,9 +42,9 @@
         </div>
         <swiper v-bind:options="swiperOptions">
           <swiper-slide v-bind:key="index" v-for="(item, index) in slideList">
-            <a v-bind:href="'/#/product/' + item.id"
-              ><img v-bind:src="item.img"
-            /></a>
+            <a v-bind:href="'/#/product/' + item.id">
+              <img v-bind:src="item.img" />
+            </a>
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
           <div class="swiper-button-prev" slot="button-prev"></div>
@@ -60,12 +57,12 @@
           v-for="(item, index) in adsList"
           v-bind:key="index"
         >
-          <img v-bind:src="item.img" alt="" />
+          <img v-lazy="item.img" alt />
         </a>
       </div>
       <div class="banner">
         <a href="/#/product/30">
-          <img src="/imgs/banner-1.png" alt="" />
+          <img v-lazy="'/imgs/banner-1.png'" alt />
         </a>
       </div>
     </div>
@@ -75,7 +72,7 @@
         <div class="wrapper">
           <div class="banner-left">
             <a href="/#/product/35">
-              <img src="/imgs/mix-alpha.jpg" alt="" />
+              <img src="/imgs/mix-alpha.jpg" alt />
             </a>
           </div>
           <div class="list-box">
@@ -83,12 +80,12 @@
               <div class="item" v-for="(item, j) in arr" :key="j">
                 <span v-bind:class="{ 'new-pro': j % 2 == 0 }">新品</span>
                 <div class="item-img">
-                  <img v-bind:src="item.mainImage" alt="" />
+                  <img v-bind:src="item.mainImage" alt />
                 </div>
                 <div class="item-info">
                   <h3>{{ item.name }}</h3>
                   <p>{{ item.subtitle }}</p>
-                  <p class="price">{{ item.price }}元</p>
+                  <p class="price" @click="addCart(item.id)">{{ item.price }}元</p>
                 </div>
               </div>
             </div>
@@ -102,7 +99,9 @@
       sureText="查看购物车"
       btnType="1"
       modalType="middle"
-      v-bind:showModal="true"
+      v-bind:showModal="showModal"
+      v-on:submit="goToCart"
+      v-on:cancel="showModal=false"
     >
       <template v-slot:body>
         <p>商品添加成功</p>
@@ -219,7 +218,8 @@ export default {
           img: "/imgs/ads/ads-4.jpg"
         }
       ],
-      phoneList: []
+      phoneList: [],
+      showModal: false
     };
   },
   mounted() {
@@ -238,6 +238,22 @@ export default {
           res.list = res.list.slice(6, 14);
           this.phoneList = [res.list.slice(0, 4), res.list.slice(4, 8)];
         });
+    },
+    addCart() {
+      this.showModal = true;
+      return;
+      // this.axios
+      //   .post("/carts", {
+      //     productId: id,
+      //     selected: true
+      //   })
+      //   .then(() => {})
+      //   .catch(() => {
+      //     this.showModal = true;
+      //   });
+    },
+    goToCart() {
+      this.$router.push("/cart");
     }
   }
 };
