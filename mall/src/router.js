@@ -10,6 +10,7 @@ import OrderList from './pages/orderList'
 import OrderPay from './pages/orderPay'
 import AliPay from './pages/aliPay'
 import OrderConfirm from './pages/orderConfirm'
+import Login from './pages/login'
 
 
 
@@ -20,7 +21,7 @@ export default new Router({
             path: '/',
             name: 'home',
             component: Home,
-            redirect:'/index',
+            redirect: '/index',
             children: [{
                     path: '/index',
                     name: 'index',
@@ -45,11 +46,15 @@ export default new Router({
             component: Cart,
         },
         {
+            path: '/login',
+            name: 'login',
+            component: Login,
+        },
+        {
             path: '/order',
             name: 'order',
             component: Order,
-            children:[
-                {
+            children: [{
                     path: 'list',
                     name: 'order-list',
                     component: OrderList,
@@ -67,10 +72,10 @@ export default new Router({
                 {
                     path: 'alipay',
                     name: 'alipay',
-                    component:AliPay,
+                    component: AliPay,
                 }
             ]
         },
-        
+
     ]
 });
