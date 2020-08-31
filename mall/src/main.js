@@ -45,7 +45,8 @@ axios.interceptors.response.use(function (response) {
 
 Vue.use(VueAxios, axios);
 Vue.use(VueCookie);
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+Vue.prototype.$message = Message;
 Vue.use(VueLazyLoad, {
   loading: '/imgs/loading-svg/loading-bars.svg'
 })
