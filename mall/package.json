@@ -26,6 +26,7 @@
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "node-sass": "^4.14.1",
+    "qrcode": "^1.4.4",
     "sass-loader": "^9.0.3",
     "swiper": "^5.4.5",
     "vue-awesome-swiper": "^4.1.1",
