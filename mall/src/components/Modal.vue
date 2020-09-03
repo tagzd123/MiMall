@@ -4,8 +4,12 @@
       <div class="mask"></div>
       <div class="modal-dialog">
         <div class="modal-header">
-          <span>{{title}}</span>
-          <a href="javascript:;" class="icon-close" v-on:click="$emit('cancel')"></a>
+          <span>{{ title }}</span>
+          <a
+            href="javascript:;"
+            class="icon-close"
+            v-on:click="$emit('cancel')"
+          ></a>
         </div>
         <div class="modal-body">
           <slot name="body"></slot>
@@ -14,13 +18,20 @@
           <a
             href="javascript:;"
             class="btn"
-            v-if="btnType==1"
+            v-if="btnType == 1"
             v-on:click="$emit('submit')"
-          >{{sureText}}</a>
-          <a href="javascript:;" class="btn" v-if="btnType==2">{{cancalText}}</a>
-          <div class="btn-group" v-if="btnType==3">
-            <a href="javascript:;" class="btn">{{sureText}}</a>
-            <a href="javascript:;" class="btn">{{cancalText}}</a>
+            >{{ sureText }}</a
+          >
+          <a href="javascript:;" class="btn" v-if="btnType == 2">{{
+            cancalText
+          }}</a>
+          <div class="btn-group" v-if="btnType == 3">
+            <a href="javascript:;" class="btn" v-on:click="$emit('submit')">{{
+              sureText
+            }}</a>
+            <a href="javascript:;" class="btn" v-on:click="$emit('cancel')">{{
+              cancalText
+            }}</a>
           </div>
         </div>
       </div>

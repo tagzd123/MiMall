@@ -1,5 +1,10 @@
 <template>
   <div class="order-confirm">
+    <order-header title="订单确认">
+      <template v-slot:tip>
+        <span>请认真填写收货地址</span>
+      </template>
+    </order-header>
     <svg
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
@@ -50,16 +55,24 @@
             <div class="addr-list clearfix">
               <div
                 class="addr-info"
-                v-for="(item,index) in list"
+                v-for="(item, index) in list"
                 :key="index"
-                :class="{'checked':index==checkIndex}"
-                @click="checkIndex=index"
+                :class="{ checked: index == checkIndex }"
+                @click="checkIndex = index"
               >
-                <h2>{{item.receiverName}}</h2>
-                <div class="phone">{{item.receiverMobile}}</div>
-                <div
-                  class="street"
-                >{{item.receiverProvince + ' '+ item.receiverCity + ' '+ item.receiverDistrict+' '+item.receiverAddress}}</div>
+                <h2>{{ item.receiverName }}</h2>
+                <div class="phone">{{ item.receiverMobile }}</div>
+                <div class="street">
+                  {{
+                    item.receiverProvince +
+                      " " +
+                      item.receiverCity +
+                      " " +
+                      item.receiverDistrict +
+                      " " +
+                      item.receiverAddress
+                  }}
+                </div>
                 <div class="action">
                   <a href="javascript:;" class="fl" @click="delAddress(item)">
                     <svg class="icon icon-del">
@@ -82,13 +95,15 @@
           <div class="item-good">
             <h2>商品</h2>
             <ul>
-              <li v-for="(item,index) in cartList" :key="index">
+              <li v-for="(item, index) in cartList" :key="index">
                 <div class="good-name">
                   <img v-lazy="item.productMainImage" alt />
-                  <span>{{item.productName}}</span>
+                  <span>{{ item.productName }}</span>
                 </div>
-                <div class="good-price">{{item.productPrice}}元x{{item.quantity}}</div>
-                <div class="good-total">{{item.productTotalPrice}}元</div>
+                <div class="good-price">
+                  {{ item.productPrice }}元x{{ item.quantity }}
+                </div>
+                <div class="good-total">{{ item.productTotalPrice }}元</div>
               </li>
             </ul>
           </div>
@@ -104,11 +119,11 @@
           <div class="detail">
             <div class="item">
               <span class="item-name">商品件数：</span>
-              <span class="item-val">{{count}}件</span>
+              <span class="item-val">{{ count }}件</span>
             </div>
             <div class="item">
               <span class="item-name">商品总价：</span>
-              <span class="item-val">{{cartTotalPrice}}元</span>
+              <span class="item-val">{{ cartTotalPrice }}元</span>
             </div>
             <div class="item">
               <span class="item-name">优惠活动：</span>
@@ -120,12 +135,14 @@
             </div>
             <div class="item-total">
               <span class="item-name">应付总额：</span>
-              <span class="item-val">{{cartTotalPrice}}元</span>
+              <span class="item-val">{{ cartTotalPrice }}元</span>
             </div>
           </div>
           <div class="btn-group">
             <a href="/#/cart" class="btn btn-default btn-large">返回购物车</a>
-            <a href="javascript:;" class="btn btn-large" @click="orderSubmit">去结算</a>
+            <a href="javascript:;" class="btn btn-large" @click="orderSubmit"
+              >去结算</a
+            >
           </div>
         </div>
       </div>
@@ -134,14 +151,24 @@
       title="新增确认"
       btnType="1"
       :showModal="showEditModal"
-      @cancel="showEditModal=false"
+      @cancel="showEditModal = false"
       @submit="submitAddress"
     >
       <template v-slot:body>
         <div class="edit-wrap">
           <div class="item">
-            <input type="text" class="input" placeholder="姓名" v-model="checkedItem.receiverName" />
-            <input type="text" class="input" placeholder="手机号" v-model="checkedItem.receiverMobile" />
+            <input
+              type="text"
+              class="input"
+              placeholder="姓名"
+              v-model="checkedItem.receiverName"
+            />
+            <input
+              type="text"
+              class="input"
+              placeholder="手机号"
+              v-model="checkedItem.receiverMobile"
+            />
           </div>
           <div class="item">
             <select name="province" v-model="checkedItem.receiverProvince">
@@ -164,10 +191,18 @@
             </select>
           </div>
           <div class="item">
-            <textarea name="street" v-model="checkedItem.receiverAddress"></textarea>
+            <textarea
+              name="street"
+              v-model="checkedItem.receiverAddress"
+            ></textarea>
           </div>
           <div class="item">
-            <input type="text" class="input" placeholder="邮编" v-model="checkedItem.receiverZip" />
+            <input
+              type="text"
+              class="input"
+              placeholder="邮编"
+              v-model="checkedItem.receiverZip"
+            />
           </div>
         </div>
       </template>
@@ -176,7 +211,7 @@
       title="删除确认"
       btnType="1"
       :showModal="showDelModal"
-      @cancel="showDelModal=false"
+      @cancel="showDelModal = false"
       @submit="submitAddress"
     >
       <template v-slot:body>
@@ -186,6 +221,7 @@
   </div>
 </template>
 <script>
+import OrderHeader from "./../components/OrderHeader";
 import Modal from "./../components/Modal";
 export default {
   name: "order-confirm",
@@ -208,7 +244,8 @@ export default {
     this.getCartList();
   },
   components: {
-    Modal
+    Modal,
+    OrderHeader
   },
   methods: {
     // 打开新增地址弹框

@@ -9,13 +9,13 @@
           <a href="javascript:;">协议规则</a>
         </div>
         <div class="topbar-user">
-          <a href="javascript:;" v-if="username">{{username}}</a>
+          <a href="javascript:;" v-if="username">{{ username }}</a>
           <a href="javascript:;" v-if="!username" @click="login">登录</a>
           <a href="javascript:;" v-if="username" @click="logout">退出</a>
-          <a href="javascript:;" v-if="username">我的订单</a>
+          <a href="/#/order/list" v-if="username">我的订单</a>
           <a href="javascript:;" class="my-cart" @click="goToCart()">
             <span class="icon-cart"></span>
-            购物车({{cartCount}})
+            购物车({{ cartCount }})
           </a>
         </div>
       </div>
@@ -30,13 +30,17 @@
             <span>小米手机</span>
             <div class="children">
               <ul>
-                <li class="product" v-for="(item,index) in phoneList" :key="index">
-                  <a v-bind:href="'/#/product/'+item.id" target="_blank">
+                <li
+                  class="product"
+                  v-for="(item, index) in phoneList"
+                  :key="index"
+                >
+                  <a v-bind:href="'/#/product/' + item.id" target="_blank">
                     <div class="pro-img">
                       <img :src="item.mainImage" :alt="item.subtitle" />
                     </div>
-                    <div class="pro-name">{{item.name}}</div>
-                    <div class="pro-price">{{item.price|currency}}</div>
+                    <div class="pro-name">{{ item.name }}</div>
+                    <div class="pro-price">{{ item.price | currency }}</div>
                   </a>
                 </li>
               </ul>
